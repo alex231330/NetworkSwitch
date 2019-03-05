@@ -30,8 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel3 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
             this.blockTab = new MetroFramework.Controls.MetroTabPage();
+            this.clsBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.getTxt = new System.Windows.Forms.TextBox();
             this.addBtn = new System.Windows.Forms.Button();
@@ -40,6 +42,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.deleteBtn = new System.Windows.Forms.Button();
             this.passwordTab = new MetroFramework.Controls.MetroTabPage();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.registerBtn = new System.Windows.Forms.Button();
             this.passwordBoxR2 = new System.Windows.Forms.TextBox();
             this.passwordBoxR1 = new System.Windows.Forms.TextBox();
@@ -49,28 +53,57 @@
             this.passwordBoxL = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.userNameBoxL = new System.Windows.Forms.TextBox();
+            this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.statLabel = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.secsBox = new System.Windows.Forms.TextBox();
+            this.minutesBox = new System.Windows.Forms.TextBox();
+            this.hoursBox = new System.Windows.Forms.TextBox();
+            this.timer_stop_btn = new System.Windows.Forms.Button();
+            this.timer_start_btn = new System.Windows.Forms.Button();
+            this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.metroTabControl1.SuspendLayout();
             this.blockTab.SuspendLayout();
             this.panel2.SuspendLayout();
             this.passwordTab.SuspendLayout();
+            this.metroTabPage1.SuspendLayout();
+            this.metroTabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.SpringGreen;
+            this.panel3.Controls.Add(this.pictureBox1);
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(950, 52);
+            this.panel3.Size = new System.Drawing.Size(950, 64);
             this.panel3.TabIndex = 7;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(47, 44);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // metroTabControl1
             // 
             this.metroTabControl1.Controls.Add(this.blockTab);
             this.metroTabControl1.Controls.Add(this.passwordTab);
-            this.metroTabControl1.Location = new System.Drawing.Point(12, 59);
+            this.metroTabControl1.Controls.Add(this.metroTabPage1);
+            this.metroTabControl1.Controls.Add(this.metroTabPage2);
+            this.metroTabControl1.Location = new System.Drawing.Point(12, 70);
             this.metroTabControl1.Name = "metroTabControl1";
             this.metroTabControl1.SelectedIndex = 1;
-            this.metroTabControl1.Size = new System.Drawing.Size(918, 414);
+            this.metroTabControl1.Size = new System.Drawing.Size(918, 402);
             this.metroTabControl1.TabIndex = 8;
             this.metroTabControl1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroTabControl1.UseCustomBackColor = true;
@@ -80,6 +113,7 @@
             // 
             // blockTab
             // 
+            this.blockTab.Controls.Add(this.clsBtn);
             this.blockTab.Controls.Add(this.panel2);
             this.blockTab.Controls.Add(this.addBtn);
             this.blockTab.Controls.Add(this.label1);
@@ -97,6 +131,19 @@
             this.blockTab.VerticalScrollbarBarColor = true;
             this.blockTab.VerticalScrollbarHighlightOnWheel = false;
             this.blockTab.VerticalScrollbarSize = 10;
+            // 
+            // clsBtn
+            // 
+            this.clsBtn.BackColor = System.Drawing.Color.SpringGreen;
+            this.clsBtn.Enabled = false;
+            this.clsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clsBtn.Location = new System.Drawing.Point(357, 326);
+            this.clsBtn.Name = "clsBtn";
+            this.clsBtn.Size = new System.Drawing.Size(124, 33);
+            this.clsBtn.TabIndex = 14;
+            this.clsBtn.Text = "Clear Hosts File";
+            this.clsBtn.UseVisualStyleBackColor = false;
+            this.clsBtn.Click += new System.EventHandler(this.clsBtn_Click);
             // 
             // panel2
             // 
@@ -124,6 +171,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.addBtn.BackColor = System.Drawing.Color.SpringGreen;
+            this.addBtn.Enabled = false;
             this.addBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addBtn.ForeColor = System.Drawing.Color.Transparent;
             this.addBtn.Image = ((System.Drawing.Image)(resources.GetObject("addBtn.Image")));
@@ -132,6 +180,7 @@
             this.addBtn.Size = new System.Drawing.Size(75, 44);
             this.addBtn.TabIndex = 8;
             this.addBtn.UseVisualStyleBackColor = false;
+            this.addBtn.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -152,6 +201,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.siteView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.siteView.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.siteView.Enabled = false;
             this.siteView.FormattingEnabled = true;
             this.siteView.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.siteView.ItemHeight = 16;
@@ -179,6 +229,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.deleteBtn.BackColor = System.Drawing.Color.SpringGreen;
             this.deleteBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.deleteBtn.Enabled = false;
             this.deleteBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteBtn.ForeColor = System.Drawing.Color.Transparent;
             this.deleteBtn.Image = ((System.Drawing.Image)(resources.GetObject("deleteBtn.Image")));
@@ -187,10 +238,13 @@
             this.deleteBtn.Size = new System.Drawing.Size(75, 44);
             this.deleteBtn.TabIndex = 10;
             this.deleteBtn.UseVisualStyleBackColor = false;
+            this.deleteBtn.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // passwordTab
             // 
             this.passwordTab.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.passwordTab.Controls.Add(this.label7);
+            this.passwordTab.Controls.Add(this.label4);
             this.passwordTab.Controls.Add(this.registerBtn);
             this.passwordTab.Controls.Add(this.passwordBoxR2);
             this.passwordTab.Controls.Add(this.passwordBoxR1);
@@ -205,12 +259,34 @@
             this.passwordTab.HorizontalScrollbarSize = 10;
             this.passwordTab.Location = new System.Drawing.Point(4, 38);
             this.passwordTab.Name = "passwordTab";
-            this.passwordTab.Size = new System.Drawing.Size(910, 372);
+            this.passwordTab.Size = new System.Drawing.Size(910, 360);
             this.passwordTab.TabIndex = 1;
             this.passwordTab.Text = "Password";
             this.passwordTab.VerticalScrollbarBarColor = true;
             this.passwordTab.VerticalScrollbarHighlightOnWheel = false;
             this.passwordTab.VerticalScrollbarSize = 10;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(34, 305);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(500, 26);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "You need to be loggined to use timer and block list";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(34, 253);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(427, 52);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "We don\'t store information.  \r\nDon\'t forget  your username and password!";
             // 
             // registerBtn
             // 
@@ -222,7 +298,7 @@
             this.registerBtn.Name = "registerBtn";
             this.registerBtn.Size = new System.Drawing.Size(166, 40);
             this.registerBtn.TabIndex = 10;
-            this.registerBtn.Text = "Let me in";
+            this.registerBtn.Text = "Register";
             this.registerBtn.UseVisualStyleBackColor = false;
             this.registerBtn.Click += new System.EventHandler(this.registerBtn_Click);
             // 
@@ -232,6 +308,7 @@
             this.passwordBoxR2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.passwordBoxR2.Location = new System.Drawing.Point(450, 139);
             this.passwordBoxR2.Name = "passwordBoxR2";
+            this.passwordBoxR2.PasswordChar = '*';
             this.passwordBoxR2.Size = new System.Drawing.Size(166, 22);
             this.passwordBoxR2.TabIndex = 9;
             this.passwordBoxR2.Tag = "p";
@@ -245,6 +322,7 @@
             this.passwordBoxR1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.passwordBoxR1.Location = new System.Drawing.Point(450, 106);
             this.passwordBoxR1.Name = "passwordBoxR1";
+            this.passwordBoxR1.PasswordChar = '*';
             this.passwordBoxR1.Size = new System.Drawing.Size(166, 22);
             this.passwordBoxR1.TabIndex = 8;
             this.passwordBoxR1.Tag = "p";
@@ -296,6 +374,7 @@
             this.passwordBoxL.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.passwordBoxL.Location = new System.Drawing.Point(39, 106);
             this.passwordBoxL.Name = "passwordBoxL";
+            this.passwordBoxL.PasswordChar = '*';
             this.passwordBoxL.Size = new System.Drawing.Size(166, 22);
             this.passwordBoxL.TabIndex = 4;
             this.passwordBoxL.Tag = "p";
@@ -327,6 +406,139 @@
             this.userNameBoxL.Enter += new System.EventHandler(this.tbFocus);
             this.userNameBoxL.Leave += new System.EventHandler(this.tbLeave);
             // 
+            // metroTabPage1
+            // 
+            this.metroTabPage1.Controls.Add(this.statLabel);
+            this.metroTabPage1.Controls.Add(this.label6);
+            this.metroTabPage1.Controls.Add(this.secsBox);
+            this.metroTabPage1.Controls.Add(this.minutesBox);
+            this.metroTabPage1.Controls.Add(this.hoursBox);
+            this.metroTabPage1.Controls.Add(this.timer_stop_btn);
+            this.metroTabPage1.Controls.Add(this.timer_start_btn);
+            this.metroTabPage1.HorizontalScrollbarBarColor = true;
+            this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.HorizontalScrollbarSize = 10;
+            this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage1.Name = "metroTabPage1";
+            this.metroTabPage1.Size = new System.Drawing.Size(910, 372);
+            this.metroTabPage1.TabIndex = 2;
+            this.metroTabPage1.Text = "Timer";
+            this.metroTabPage1.VerticalScrollbarBarColor = true;
+            this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.VerticalScrollbarSize = 10;
+            // 
+            // statLabel
+            // 
+            this.statLabel.AutoSize = true;
+            this.statLabel.BackColor = System.Drawing.Color.Transparent;
+            this.statLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statLabel.Location = new System.Drawing.Point(271, 94);
+            this.statLabel.Name = "statLabel";
+            this.statLabel.Size = new System.Drawing.Size(397, 31);
+            this.statLabel.TabIndex = 9;
+            this.statLabel.Text = "Current status: Internet enabled";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(70, 23);
+            this.label6.Name = "label6";
+            this.label6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label6.Size = new System.Drawing.Size(503, 29);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Here you can turn off the internet for a while";
+            // 
+            // secsBox
+            // 
+            this.secsBox.Enabled = false;
+            this.secsBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 27F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.secsBox.Location = new System.Drawing.Point(198, 84);
+            this.secsBox.Name = "secsBox";
+            this.secsBox.Size = new System.Drawing.Size(56, 58);
+            this.secsBox.TabIndex = 7;
+            this.secsBox.Text = "00";
+            // 
+            // minutesBox
+            // 
+            this.minutesBox.Enabled = false;
+            this.minutesBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 27F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.minutesBox.Location = new System.Drawing.Point(133, 84);
+            this.minutesBox.Name = "minutesBox";
+            this.minutesBox.Size = new System.Drawing.Size(59, 58);
+            this.minutesBox.TabIndex = 6;
+            this.minutesBox.Text = "00";
+            // 
+            // hoursBox
+            // 
+            this.hoursBox.Enabled = false;
+            this.hoursBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 27F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hoursBox.Location = new System.Drawing.Point(70, 84);
+            this.hoursBox.Name = "hoursBox";
+            this.hoursBox.Size = new System.Drawing.Size(57, 58);
+            this.hoursBox.TabIndex = 5;
+            this.hoursBox.Text = "00";
+            // 
+            // timer_stop_btn
+            // 
+            this.timer_stop_btn.Enabled = false;
+            this.timer_stop_btn.Location = new System.Drawing.Point(172, 198);
+            this.timer_stop_btn.Name = "timer_stop_btn";
+            this.timer_stop_btn.Size = new System.Drawing.Size(82, 33);
+            this.timer_stop_btn.TabIndex = 4;
+            this.timer_stop_btn.Text = "Stop";
+            this.timer_stop_btn.UseVisualStyleBackColor = true;
+            this.timer_stop_btn.Click += new System.EventHandler(this.timer_stop_btn_Click);
+            // 
+            // timer_start_btn
+            // 
+            this.timer_start_btn.Enabled = false;
+            this.timer_start_btn.Location = new System.Drawing.Point(70, 198);
+            this.timer_start_btn.Name = "timer_start_btn";
+            this.timer_start_btn.Size = new System.Drawing.Size(91, 33);
+            this.timer_start_btn.TabIndex = 3;
+            this.timer_start_btn.Text = "Start";
+            this.timer_start_btn.UseVisualStyleBackColor = true;
+            this.timer_start_btn.Click += new System.EventHandler(this.timer_start_btn_Click);
+            // 
+            // metroTabPage2
+            // 
+            this.metroTabPage2.Controls.Add(this.button1);
+            this.metroTabPage2.Controls.Add(this.label5);
+            this.metroTabPage2.HorizontalScrollbarBarColor = true;
+            this.metroTabPage2.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage2.HorizontalScrollbarSize = 10;
+            this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage2.Name = "metroTabPage2";
+            this.metroTabPage2.Size = new System.Drawing.Size(910, 372);
+            this.metroTabPage2.TabIndex = 3;
+            this.metroTabPage2.Text = "Donate";
+            this.metroTabPage2.VerticalScrollbarBarColor = true;
+            this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage2.VerticalScrollbarSize = 10;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(338, 216);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(210, 48);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Donate";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_2);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(24, 34);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(863, 108);
+            this.label5.TabIndex = 2;
+            this.label5.Text = resources.GetString("label5.Text");
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -334,9 +546,13 @@
             this.ClientSize = new System.Drawing.Size(947, 543);
             this.Controls.Add(this.metroTabControl1);
             this.Controls.Add(this.panel3);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
             this.Text = "Sofu Blocker";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.metroTabControl1.ResumeLayout(false);
             this.blockTab.ResumeLayout(false);
             this.blockTab.PerformLayout();
@@ -344,6 +560,10 @@
             this.panel2.PerformLayout();
             this.passwordTab.ResumeLayout(false);
             this.passwordTab.PerformLayout();
+            this.metroTabPage1.ResumeLayout(false);
+            this.metroTabPage1.PerformLayout();
+            this.metroTabPage2.ResumeLayout(false);
+            this.metroTabPage2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -369,6 +589,21 @@
         private System.Windows.Forms.TextBox passwordBoxL;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox userNameBoxL;
+        private System.Windows.Forms.Button clsBtn;
+        private System.Windows.Forms.Label label4;
+        private MetroFramework.Controls.MetroTabPage metroTabPage1;
+        private MetroFramework.Controls.MetroTabPage metroTabPage2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button timer_stop_btn;
+        private System.Windows.Forms.Button timer_start_btn;
+        private System.Windows.Forms.TextBox secsBox;
+        private System.Windows.Forms.TextBox minutesBox;
+        private System.Windows.Forms.TextBox hoursBox;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label statLabel;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label7;
     }
 }
 

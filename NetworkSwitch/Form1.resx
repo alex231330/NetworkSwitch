@@ -118,6 +118,34 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+</value>
+  </data>
   <data name="addBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAABGdBTUEAALGPC/xhBQAAAG1JREFUWEft
@@ -133,5 +161,13 @@
         aXjDe6SRPn2v/8Yu9L6hxfh1nswpokCwCCsQDQWqwQrUMqfpAAWqwQpEQ4FqsALl5jwOrUA1ZugNatF6
         6QzwgN7CktZjva8wwR2e0FseazVWO0IhxMcJ4QZLqpXundVhXQAAAABJRU5ErkJggg==
 </value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Hey guys. 
+Thanks for using the Sofu Blocker. If you like it and want to support it keep running, please donate.
+ Your donation will help us continue to develop Sofu Blocker as free software.
+ It is only through the support of the community that we are able to continue providing Sofu Blocker to the people around the world. 
+You can support us and by telling your friends and family about Sofu Blocker. 
+Thanks in advance, </value>
   </data>
 </root>
