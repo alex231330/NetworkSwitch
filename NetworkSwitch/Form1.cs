@@ -56,6 +56,7 @@ namespace NetworkSwitch
             undisableNet();
             config = ConfigurationManager.OpenExeConfiguration(
                             System.Reflection.Assembly.GetExecutingAssembly().Location);
+            
             Console.WriteLine(GetDefaultBrowserPath());
             using (StreamReader sr = new StreamReader(filepath))
             { 
@@ -109,14 +110,16 @@ namespace NetworkSwitch
             if(config.AppSettings.Settings[login] != null)
             {
                 MessageBox.Show("This name has already been taken!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
             if (login != null && pass2 != null && pass2 != null)
             {
                 if (String.Compare(pass1, pass2) == 0)
                 {
+                    Console.WriteLine(pass1.GetHashCode().ToString());
                     MessageBox.Show("Succesfuly Registered!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    config.AppSettings.Settings.Add(login, pass1);
+                    config.AppSettings.Settings.Add(login, pass1.GetHashCode().ToString());
                     config.Save(ConfigurationSaveMode.Modified);
                     ConfigurationManager.RefreshSection("appSettings");
                 }
@@ -129,8 +132,10 @@ namespace NetworkSwitch
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
-            string pass = ConfigurationManager.AppSettings[userNameBoxL.Text];
-            if (pass != null)
+            int pass = Int32.Parse(ConfigurationManager.AppSettings[userNameBoxL.Text]);
+            Console.WriteLine(pass);
+            Console.WriteLine(passwordBoxL.Text.ToString());
+            if (pass == passwordBoxL.Text.ToString().GetHashCode())
             {
                 label2.Text = "Loggined";
                 clsBtn.Enabled = true;
