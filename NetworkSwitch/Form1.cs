@@ -13,10 +13,9 @@ namespace NetworkSwitch
     public partial class Form1 : Form
     {
         const string filepath = "C:\\Windows\\System32\\drivers\\etc\\hosts";
-        private Configuration config;
+        string passpath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data.txt").ToString();
         private static System.Timers.Timer timer;
         private int h, m, s;
-        private NotifyIcon trayIcon;
 
         private static string GetDefaultBrowserPath()
 
@@ -54,8 +53,13 @@ namespace NetworkSwitch
         {
             InitializeComponent();
             undisableNet();
-            config = ConfigurationManager.OpenExeConfiguration(
-                            System.Reflection.Assembly.GetExecutingAssembly().Location);
+            Console.WriteLine(passpath);
+            if (!File.Exists(passpath))
+            {
+                File.Create(passpath);
+            }
+            //config = ConfigurationManager.OpenExeConfiguration(
+            //                System.Reflection.Assembly.GetExecutingAssembly().Location);
             
             Console.WriteLine(GetDefaultBrowserPath());
             using (StreamReader sr = new StreamReader(filepath))
@@ -79,9 +83,10 @@ namespace NetworkSwitch
             if (!string.IsNullOrEmpty(site))
             {
                 siteView.Items.Add(site);
-                using (StreamWriter sw = File.AppendText(filepath))
+                using (StreamWriter sw = File.AppendText(passpath))
                 {
                     sw.WriteLine("0.0.0.0\t" + site);
+                    sw.WriteLine("0.0.0.0\t" + "www." +  site);
                     sw.Close();
                 }
             }
@@ -101,57 +106,85 @@ namespace NetworkSwitch
             }
         }
 
+        private bool isReg = false;
+
         private void registerBtn_Click(object sender, EventArgs e)
         {
+            File.SetAttributes(passpath, FileAttributes.Normal);
             string login = usernameBoxR.Text;
             string pass1 = passwordBoxR1.Text;
             string pass2 = passwordBoxR2.Text;
+            string[] lines = File.ReadAllLines(passpath);
 
-            if(config.AppSettings.Settings[login] != null)
+            foreach (string line in lines)
+            {
+                string[] arr = line.Split();
+                if (String.Compare(login, arr[0]) == 0)
+                {
+                    isReg = true;
+                    return;
+                }
+
+                if (login != null && pass2 != null && pass2 != null)
+                {
+                    if (String.Compare(pass1, pass2) == 0)
+                    {
+                        using (StreamWriter sw = File.AppendText(passpath))
+                        {
+                            MessageBox.Show("Succesfuly Registered!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            sw.WriteLine(login + " " + pass1.GetHashCode().ToString());
+                        }
+                        File.SetAttributes(passpath, FileAttributes.Encrypted | FileAttributes.ReadOnly | FileAttributes.Hidden);
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Password must match!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+            }
+            if (isReg)
             {
                 MessageBox.Show("This name has already been taken!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (login != null && pass2 != null && pass2 != null)
-            {
-                if (String.Compare(pass1, pass2) == 0)
-                {
-                    Console.WriteLine(pass1.GetHashCode().ToString());
-                    MessageBox.Show("Succesfuly Registered!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    config.AppSettings.Settings.Add(login, pass1.GetHashCode().ToString());
-                    config.Save(ConfigurationSaveMode.Modified);
-                    ConfigurationManager.RefreshSection("appSettings");
-                }
-                else
-                {
-                    MessageBox.Show("Password must match!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
             }
         }
 
+        private Boolean isLog = false;
+
         private void loginBtn_Click(object sender, EventArgs e)
         {
-            int pass = Int32.Parse(ConfigurationManager.AppSettings[userNameBoxL.Text]);
-            Console.WriteLine(pass);
-            Console.WriteLine(passwordBoxL.Text.ToString());
-            if (pass == passwordBoxL.Text.ToString().GetHashCode())
+            string[] lines = File.ReadAllLines(passpath);
+
+            foreach (string line in lines)
             {
-                label2.Text = "Loggined";
-                clsBtn.Enabled = true;
-                siteView.Enabled = true;
-                addBtn.Enabled = true;
-                deleteBtn.Enabled = true;
-                userNameBoxL.Enabled = false;
-                passwordBoxL.Enabled = false;
-                loginBtn.Enabled = false;
-                timer_start_btn.Enabled = true;
-                timer_stop_btn.Enabled = true;
-                hoursBox.Enabled = true;
-                minutesBox.Enabled = true;
-                secsBox.Enabled = true;
+                string[] arr = line.Split();
+                if (String.Compare(arr[0], userNameBoxL.Text) == 0)
+                {
+                    int pass = Int32.Parse(arr[1]);
+                    Console.WriteLine(pass);
+                    Console.WriteLine(passwordBoxL.Text.ToString());
+                    if (pass == passwordBoxL.Text.ToString().GetHashCode())
+                    {
+                        isLog = true;
+                        label2.Text = "Loggined";
+                        clsBtn.Enabled = true;
+                        siteView.Enabled = true;
+                        addBtn.Enabled = true;
+                        deleteBtn.Enabled = true;
+                        userNameBoxL.Enabled = false;
+                        passwordBoxL.Enabled = false;
+                        loginBtn.Enabled = false;
+                        timer_start_btn.Enabled = true;
+                        timer_stop_btn.Enabled = true;
+                        hoursBox.Enabled = true;
+                        minutesBox.Enabled = true;
+                        secsBox.Enabled = true;
+                        break;
+                    }
+                }
             }
-            else
+            if (!isLog)
             {
                 MessageBox.Show("no such user!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -248,8 +281,6 @@ namespace NetworkSwitch
         private void Exit(object sender, EventArgs e)
         {
             // Hide tray icon, otherwise it will remain shown until user mouses over it
-            trayIcon.Visible = false;
-
             Application.Exit();
         }
 
