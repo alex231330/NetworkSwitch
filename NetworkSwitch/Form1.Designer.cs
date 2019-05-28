@@ -54,6 +54,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.userNameBoxL = new System.Windows.Forms.TextBox();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.stopBtn = new System.Windows.Forms.Button();
             this.statLabel = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.secsBox = new System.Windows.Forms.TextBox();
@@ -76,7 +77,7 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.SpringGreen;
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(176)))), ((int)(((byte)(145)))));
             this.panel3.Controls.Add(this.pictureBox1);
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
@@ -96,13 +97,13 @@
             // 
             // metroTabControl1
             // 
-            this.metroTabControl1.Controls.Add(this.blockTab);
             this.metroTabControl1.Controls.Add(this.passwordTab);
+            this.metroTabControl1.Controls.Add(this.blockTab);
             this.metroTabControl1.Controls.Add(this.metroTabPage1);
             this.metroTabControl1.Controls.Add(this.metroTabPage2);
             this.metroTabControl1.Location = new System.Drawing.Point(12, 70);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 1;
+            this.metroTabControl1.SelectedIndex = 0;
             this.metroTabControl1.Size = new System.Drawing.Size(918, 402);
             this.metroTabControl1.TabIndex = 8;
             this.metroTabControl1.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -125,7 +126,7 @@
             this.blockTab.HorizontalScrollbarSize = 10;
             this.blockTab.Location = new System.Drawing.Point(4, 38);
             this.blockTab.Name = "blockTab";
-            this.blockTab.Size = new System.Drawing.Size(910, 372);
+            this.blockTab.Size = new System.Drawing.Size(910, 360);
             this.blockTab.TabIndex = 0;
             this.blockTab.Text = "Block list";
             this.blockTab.VerticalScrollbarBarColor = true;
@@ -134,7 +135,7 @@
             // 
             // clsBtn
             // 
-            this.clsBtn.BackColor = System.Drawing.Color.SpringGreen;
+            this.clsBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(198)))), ((int)(((byte)(175)))));
             this.clsBtn.Enabled = false;
             this.clsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clsBtn.Location = new System.Drawing.Point(357, 326);
@@ -150,7 +151,7 @@
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.BackColor = System.Drawing.Color.SpringGreen;
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(198)))), ((int)(((byte)(175)))));
             this.panel2.Controls.Add(this.getTxt);
             this.panel2.Location = new System.Drawing.Point(289, 52);
             this.panel2.Name = "panel2";
@@ -170,7 +171,7 @@
             this.addBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.addBtn.BackColor = System.Drawing.Color.SpringGreen;
+            this.addBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(198)))), ((int)(((byte)(175)))));
             this.addBtn.Enabled = false;
             this.addBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addBtn.ForeColor = System.Drawing.Color.Transparent;
@@ -216,7 +217,7 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.SpringGreen;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(198)))), ((int)(((byte)(175)))));
             this.panel1.Location = new System.Drawing.Point(289, 110);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(284, 210);
@@ -227,7 +228,7 @@
             this.deleteBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.deleteBtn.BackColor = System.Drawing.Color.SpringGreen;
+            this.deleteBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(198)))), ((int)(((byte)(175)))));
             this.deleteBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.deleteBtn.Enabled = false;
             this.deleteBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -242,7 +243,7 @@
             // 
             // passwordTab
             // 
-            this.passwordTab.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.passwordTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(243)))), ((int)(((byte)(252)))));
             this.passwordTab.Controls.Add(this.label7);
             this.passwordTab.Controls.Add(this.label4);
             this.passwordTab.Controls.Add(this.registerBtn);
@@ -265,6 +266,7 @@
             this.passwordTab.VerticalScrollbarBarColor = true;
             this.passwordTab.VerticalScrollbarHighlightOnWheel = false;
             this.passwordTab.VerticalScrollbarSize = 10;
+            this.passwordTab.Click += new System.EventHandler(this.passwordTab_Click);
             // 
             // label7
             // 
@@ -273,9 +275,9 @@
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(34, 305);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(500, 26);
+            this.label7.Size = new System.Drawing.Size(437, 26);
             this.label7.TabIndex = 12;
-            this.label7.Text = "You need to be loggined to use timer and block list";
+            this.label7.Text = "You need to be logged in to use the blocker!";
             // 
             // label4
             // 
@@ -284,13 +286,13 @@
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(34, 253);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(427, 52);
+            this.label4.Size = new System.Drawing.Size(423, 52);
             this.label4.TabIndex = 11;
-            this.label4.Text = "We don\'t store information.  \r\nDon\'t forget  your username and password!";
+            this.label4.Text = "We don\'t store the information.  \r\nDont forget  your username and password!";
             // 
             // registerBtn
             // 
-            this.registerBtn.BackColor = System.Drawing.Color.SpringGreen;
+            this.registerBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(176)))), ((int)(((byte)(145)))));
             this.registerBtn.Cursor = System.Windows.Forms.Cursors.Default;
             this.registerBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.registerBtn.ForeColor = System.Drawing.Color.White;
@@ -304,7 +306,7 @@
             // 
             // passwordBoxR2
             // 
-            this.passwordBoxR2.BackColor = System.Drawing.Color.SpringGreen;
+            this.passwordBoxR2.BackColor = System.Drawing.Color.White;
             this.passwordBoxR2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.passwordBoxR2.Location = new System.Drawing.Point(450, 139);
             this.passwordBoxR2.Name = "passwordBoxR2";
@@ -318,7 +320,7 @@
             // 
             // passwordBoxR1
             // 
-            this.passwordBoxR1.BackColor = System.Drawing.Color.SpringGreen;
+            this.passwordBoxR1.BackColor = System.Drawing.Color.White;
             this.passwordBoxR1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.passwordBoxR1.Location = new System.Drawing.Point(450, 106);
             this.passwordBoxR1.Name = "passwordBoxR1";
@@ -332,7 +334,7 @@
             // 
             // usernameBoxR
             // 
-            this.usernameBoxR.BackColor = System.Drawing.Color.SpringGreen;
+            this.usernameBoxR.BackColor = System.Drawing.Color.White;
             this.usernameBoxR.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.usernameBoxR.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.usernameBoxR.Location = new System.Drawing.Point(450, 77);
@@ -357,7 +359,7 @@
             // 
             // loginBtn
             // 
-            this.loginBtn.BackColor = System.Drawing.Color.SpringGreen;
+            this.loginBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(176)))), ((int)(((byte)(145)))));
             this.loginBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loginBtn.ForeColor = System.Drawing.Color.White;
             this.loginBtn.Location = new System.Drawing.Point(39, 135);
@@ -370,7 +372,7 @@
             // 
             // passwordBoxL
             // 
-            this.passwordBoxL.BackColor = System.Drawing.Color.SpringGreen;
+            this.passwordBoxL.BackColor = System.Drawing.Color.White;
             this.passwordBoxL.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.passwordBoxL.Location = new System.Drawing.Point(39, 106);
             this.passwordBoxL.Name = "passwordBoxL";
@@ -395,7 +397,7 @@
             // 
             // userNameBoxL
             // 
-            this.userNameBoxL.BackColor = System.Drawing.Color.SpringGreen;
+            this.userNameBoxL.BackColor = System.Drawing.Color.White;
             this.userNameBoxL.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.userNameBoxL.Location = new System.Drawing.Point(39, 77);
             this.userNameBoxL.Name = "userNameBoxL";
@@ -408,6 +410,7 @@
             // 
             // metroTabPage1
             // 
+            this.metroTabPage1.Controls.Add(this.stopBtn);
             this.metroTabPage1.Controls.Add(this.statLabel);
             this.metroTabPage1.Controls.Add(this.label6);
             this.metroTabPage1.Controls.Add(this.secsBox);
@@ -420,12 +423,24 @@
             this.metroTabPage1.HorizontalScrollbarSize = 10;
             this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(910, 372);
+            this.metroTabPage1.Size = new System.Drawing.Size(910, 360);
             this.metroTabPage1.TabIndex = 2;
             this.metroTabPage1.Text = "Timer";
             this.metroTabPage1.VerticalScrollbarBarColor = true;
             this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.VerticalScrollbarSize = 10;
+            // 
+            // stopBtn
+            // 
+            this.stopBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(176)))), ((int)(((byte)(145)))));
+            this.stopBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.stopBtn.Location = new System.Drawing.Point(260, 198);
+            this.stopBtn.Name = "stopBtn";
+            this.stopBtn.Size = new System.Drawing.Size(86, 33);
+            this.stopBtn.TabIndex = 10;
+            this.stopBtn.Text = "Stop";
+            this.stopBtn.UseVisualStyleBackColor = false;
+            this.stopBtn.Click += new System.EventHandler(this.stopBtn_Click);
             // 
             // statLabel
             // 
@@ -482,24 +497,28 @@
             // 
             // timer_stop_btn
             // 
+            this.timer_stop_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(176)))), ((int)(((byte)(145)))));
             this.timer_stop_btn.Enabled = false;
+            this.timer_stop_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.timer_stop_btn.Location = new System.Drawing.Point(172, 198);
             this.timer_stop_btn.Name = "timer_stop_btn";
             this.timer_stop_btn.Size = new System.Drawing.Size(82, 33);
             this.timer_stop_btn.TabIndex = 4;
-            this.timer_stop_btn.Text = "Stop";
-            this.timer_stop_btn.UseVisualStyleBackColor = true;
+            this.timer_stop_btn.Text = "Pause";
+            this.timer_stop_btn.UseVisualStyleBackColor = false;
             this.timer_stop_btn.Click += new System.EventHandler(this.timer_stop_btn_Click);
             // 
             // timer_start_btn
             // 
+            this.timer_start_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(176)))), ((int)(((byte)(145)))));
             this.timer_start_btn.Enabled = false;
+            this.timer_start_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.timer_start_btn.Location = new System.Drawing.Point(70, 198);
             this.timer_start_btn.Name = "timer_start_btn";
             this.timer_start_btn.Size = new System.Drawing.Size(91, 33);
             this.timer_start_btn.TabIndex = 3;
             this.timer_start_btn.Text = "Start";
-            this.timer_start_btn.UseVisualStyleBackColor = true;
+            this.timer_start_btn.UseVisualStyleBackColor = false;
             this.timer_start_btn.Click += new System.EventHandler(this.timer_start_btn_Click);
             // 
             // metroTabPage2
@@ -511,7 +530,7 @@
             this.metroTabPage2.HorizontalScrollbarSize = 10;
             this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage2.Name = "metroTabPage2";
-            this.metroTabPage2.Size = new System.Drawing.Size(910, 372);
+            this.metroTabPage2.Size = new System.Drawing.Size(910, 360);
             this.metroTabPage2.TabIndex = 3;
             this.metroTabPage2.Text = "Donate";
             this.metroTabPage2.VerticalScrollbarBarColor = true;
@@ -604,6 +623,7 @@
         private System.Windows.Forms.Label statLabel;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button stopBtn;
     }
 }
 

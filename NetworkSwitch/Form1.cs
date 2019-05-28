@@ -7,23 +7,24 @@ using System.Configuration;
 using System.Diagnostics;
 using Microsoft.Win32;
 using NetFwTypeLib;
+using Microsoft.VisualBasic;
+using System.Drawing;
 
 namespace NetworkSwitch
 {
     public partial class Form1 : Form
     {
         const string filepath = "C:\\Windows\\System32\\drivers\\etc\\hosts";
-        string passpath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data.txt").ToString();
         private static System.Timers.Timer timer;
+        private RegistryKey key;
+        private String currentUsername = null;
         private int h, m, s;
 
         private static string GetDefaultBrowserPath()
-
         {
             string key = @"htmlfile\shell\open\command";
             RegistryKey registryKey = Registry.ClassesRoot.OpenSubKey(key, false);
             return ((string)registryKey.GetValue(null, null)).Split('"')[1];
-            
         }
 
         private void disableNet()
@@ -50,27 +51,24 @@ namespace NetworkSwitch
         }
 
         public Form1()
-        {
+        {  
             InitializeComponent();
+            this.Icon = new Icon("logo32.ico");
             undisableNet();
-            Console.WriteLine(passpath);
-            if (!File.Exists(passpath))
-            {
-                File.Create(passpath);
-            }
-            //config = ConfigurationManager.OpenExeConfiguration(
-            //                System.Reflection.Assembly.GetExecutingAssembly().Location);
-            
+            key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\SofuBlockerData");
             Console.WriteLine(GetDefaultBrowserPath());
             using (StreamReader sr = new StreamReader(filepath))
-            { 
+            {
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
                     string[] arr = line.Split(null);
                     if (arr.Length > 1)
                     {
-                        siteView.Items.Add(arr[1]);
+                        if (!arr[1].Contains("www."))
+                        {
+                            siteView.Items.Add(arr[1]);
+                        }
                     }
                 }
                 sr.Close();
@@ -83,14 +81,17 @@ namespace NetworkSwitch
             if (!string.IsNullOrEmpty(site))
             {
                 siteView.Items.Add(site);
-                using (StreamWriter sw = File.AppendText(passpath))
+                //siteView.Items.Add("www." + site);
+
+                using (StreamWriter sw = File.AppendText(filepath))
                 {
                     sw.WriteLine("0.0.0.0\t" + site);
-                    sw.WriteLine("0.0.0.0\t" + "www." +  site);
+                    sw.WriteLine("0.0.0.0\t" + "www." + site);
                     sw.Close();
                 }
             }
         }
+        
 
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -99,9 +100,14 @@ namespace NetworkSwitch
             {
                 siteView.Items.RemoveAt(choosedIndex);
                 List<string> allLines = File.ReadAllLines(filepath).ToList();
+
+                Console.WriteLine(allLines.Count);
                 Console.WriteLine(choosedIndex);
-                Console.WriteLine(allLines[choosedIndex]);
-                allLines.Remove(allLines[choosedIndex]);
+                Console.WriteLine(allLines[choosedIndex * 2]);
+                Console.WriteLine(allLines[choosedIndex * 2 + 1]);
+
+                allLines.Remove(allLines[(choosedIndex * 2) + 1]);
+                allLines.Remove(allLines[(choosedIndex * 2)]);
                 File.WriteAllLines(filepath, allLines.ToArray());
             }
         }
@@ -110,83 +116,64 @@ namespace NetworkSwitch
 
         private void registerBtn_Click(object sender, EventArgs e)
         {
-            File.SetAttributes(passpath, FileAttributes.Normal);
             string login = usernameBoxR.Text;
             string pass1 = passwordBoxR1.Text;
             string pass2 = passwordBoxR2.Text;
-            string[] lines = File.ReadAllLines(passpath);
 
-            foreach (string line in lines)
+            if (login != null && pass2 != null && pass2 != null)
             {
-                string[] arr = line.Split();
-                if (String.Compare(login, arr[0]) == 0)
+
+                if (key.GetValue(login) != null)
                 {
-                    isReg = true;
+                    MessageBox.Show("This name has already been taken!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                if (login != null && pass2 != null && pass2 != null)
+                if (String.Compare(pass1, pass2) == 0)
                 {
-                    if (String.Compare(pass1, pass2) == 0)
-                    {
-                        using (StreamWriter sw = File.AppendText(passpath))
-                        {
-                            MessageBox.Show("Succesfuly Registered!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            sw.WriteLine(login + " " + pass1.GetHashCode().ToString());
-                        }
-                        File.SetAttributes(passpath, FileAttributes.Encrypted | FileAttributes.ReadOnly | FileAttributes.Hidden);
-                        return;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Password must match!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
+                    key.SetValue(login.ToString(), pass1.GetHashCode());
+                    MessageBox.Show("Successfully registered!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
                 }
-            }
-            if (isReg)
-            {
-                MessageBox.Show("This name has already been taken!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else
+                {
+                    MessageBox.Show("Password must match!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
             }
         }
-
-        private Boolean isLog = false;
-
+    
         private void loginBtn_Click(object sender, EventArgs e)
         {
-            string[] lines = File.ReadAllLines(passpath);
-
-            foreach (string line in lines)
+            int password;
+            if(key.GetValue(userNameBoxL.Text.ToString()) != null)
             {
-                string[] arr = line.Split();
-                if (String.Compare(arr[0], userNameBoxL.Text) == 0)
+                password = Convert.ToInt32(key.GetValue(userNameBoxL.Text.ToString()));
+                if (password == passwordBoxL.Text.ToString().GetHashCode())
                 {
-                    int pass = Int32.Parse(arr[1]);
-                    Console.WriteLine(pass);
-                    Console.WriteLine(passwordBoxL.Text.ToString());
-                    if (pass == passwordBoxL.Text.ToString().GetHashCode())
-                    {
-                        isLog = true;
-                        label2.Text = "Loggined";
-                        clsBtn.Enabled = true;
-                        siteView.Enabled = true;
-                        addBtn.Enabled = true;
-                        deleteBtn.Enabled = true;
-                        userNameBoxL.Enabled = false;
-                        passwordBoxL.Enabled = false;
-                        loginBtn.Enabled = false;
-                        timer_start_btn.Enabled = true;
-                        timer_stop_btn.Enabled = true;
-                        hoursBox.Enabled = true;
-                        minutesBox.Enabled = true;
-                        secsBox.Enabled = true;
-                        break;
-                    }
+                    currentUsername = userNameBoxL.Text.ToString();
+                    label2.Text = "Loggined";
+                    clsBtn.Enabled = true;
+                    siteView.Enabled = true;
+                    addBtn.Enabled = true;
+                    deleteBtn.Enabled = true;
+                    userNameBoxL.Enabled = false;
+                    passwordBoxL.Enabled = false;
+                    loginBtn.Enabled = false;
+                    timer_start_btn.Enabled = true;
+                    timer_stop_btn.Enabled = true;
+                    hoursBox.Enabled = true;
+                    minutesBox.Enabled = true;
+                    secsBox.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("Wrong password!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            if (!isLog)
+            else
             {
-                MessageBox.Show("no such user!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("No such user!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -212,7 +199,7 @@ namespace NetworkSwitch
         }
 
         private void clsBtn_Click(object sender, EventArgs e)
-        {
+        {       
             System.IO.File.WriteAllText(filepath, string.Empty);
             siteView.Items.Clear();
         }
@@ -265,8 +252,10 @@ namespace NetworkSwitch
                 hoursBox.Text = h.ToString();
                 minutesBox.Text = m.ToString();
                 secsBox.Text = s.ToString();
-                if(h == 0 && m == 0 && s == 0)
+                Console.WriteLine(flag);
+                if((h == 0 && m == 0 && s == 0) || flag)
                 {
+                    flag = false;
                     statLabel.Text = "Current status: Internet enabled";
                     undisableNet();
                     Console.WriteLine("Timer finished");
@@ -278,6 +267,8 @@ namespace NetworkSwitch
             }));
         }
 
+        private bool flag = false;
+
         private void Exit(object sender, EventArgs e)
         {
             // Hide tray icon, otherwise it will remain shown until user mouses over it
@@ -286,15 +277,24 @@ namespace NetworkSwitch
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Exit or no?",
-                       "Sofu Blocker",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Information) == DialogResult.No)
+            if (currentUsername != null)
             {
-                e.Cancel = true;
-            }
-            else {
-                undisableNet();
+                PasswordForm dialog = new PasswordForm(currentUsername);
+                DialogResult res = dialog.ShowDialog();
+                Console.WriteLine(res.ToString());
+                if (res == DialogResult.OK)
+                {
+                    Console.WriteLine("OK");
+                    //e.Cancel = false;
+                    undisableNet();
+                    System.Environment.Exit(1);
+                }
+                if (res == DialogResult.Abort)
+                {
+                    Console.WriteLine("Abort");
+                    dialog.Close();
+                    e.Cancel = true;
+                }
             }
         }
 
@@ -308,8 +308,42 @@ namespace NetworkSwitch
 
         }
 
+        bool isStopped = true;
+
+        private void stopBtn_Click(object sender, EventArgs e)
+        {
+            if (!isStopped)
+            {
+                undisableNet();
+                flag = true;
+                h = 0;
+                m = 0;
+                s = 0;
+            }else
+            {
+                flag = false;
+                statLabel.Text = "Current status: Internet enabled";
+                undisableNet();
+                Console.WriteLine("Timer finished");
+                timer.Stop();
+                h = 0;
+                m = 0;
+                s = 0;
+                hoursBox.Text = h.ToString();
+                minutesBox.Text = m.ToString();
+                secsBox.Text = s.ToString();
+            }
+        }
+
+        private void passwordTab_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void timer_start_btn_Click(object sender, EventArgs e)
         {
+            flag = false;
+            isStopped = false;
             statLabel.Text = "Current status: Internet disabled";
             disableNet();
             h = int.Parse(hoursBox.Text);
@@ -323,10 +357,8 @@ namespace NetworkSwitch
 
         private void timer_stop_btn_Click(object sender, EventArgs e)
         {
+            isStopped = true;
             timer.Stop();
-            h = 0;
-            m = 0;
-            s = 0;
         }
     }
 }
